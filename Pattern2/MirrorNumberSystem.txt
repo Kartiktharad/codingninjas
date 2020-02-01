@@ -1,0 +1,40 @@
+Print the following pattern for the given N number of rows.
+Pattern for N = 4
+      1
+     12
+    123
+   1234
+Input format :
+Integer N (Total no. of rows)
+Output format :
+Pattern in N lines
+Sample Input :
+3
+Sample Output :
+      1
+     12
+    123
+
+
+
+    #include<iostream>
+    using namespace std;
+
+
+    int main(){
+
+           /*  Read input as specified in the question.
+    	* Print output as specified in the question.
+    	*/
+      int n;
+        cin>>n;
+        for(int r=1;r<=n;r++)
+        {
+            for(int space=n-r-1;space>=0;space--)
+                cout<<" ";
+            for(int c=1;c<=r;c++)
+                cout<<c;
+            cout<<endl;
+        }
+        return 0;
+    }

@@ -1,0 +1,41 @@
+Given a string, find and return the highest occurring character present in the given string.
+If there are 2 characters in the input string with same frequency, return the character which comes first.
+Note : Assume all the characters in the given string are lowercase.
+Sample Input 1:
+abdefgbabfba
+Sample Output 1:
+b
+Sample Input 2:
+xy
+Sample Output 2:
+x
+
+
+#include <iostream>
+#include "solution.h"
+using namespace std;
+
+int main() {
+    char input[1000];
+    cin.getline(input, 1000);
+    cout << highestOccurringChar(input) << endl;
+}
+
+// input - given string
+char highestOccurringChar(char input[]) {
+    // Write your code here
+int count[256]={0};
+    int len=0;
+    while(input[len]!='\0')
+        len++;
+    int max=0;
+    char result;
+    for(int i=0;i<len;i++)
+    {
+        count[input[i]]++;
+        if (max < count[input[i]]) {
+            max = count[input[i]];
+            result = input[i]; }
+    }
+return result;
+}

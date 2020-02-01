@@ -1,0 +1,35 @@
+Given a binary number as an integer N, convert it into decimal and print.
+Input format :
+An integer N
+Output format :
+Corresponding Decimal number (as integer)
+Sample Input 1 :
+1100
+Sample Output 1 :
+12
+Sample Input 2 :
+111
+Sample Output 2 :
+7
+
+#include<iostream>
+using namespace std;
+
+int main() {
+	// Write your code here
+	int n;
+    cin>>n;
+    int dec_value = 0;
+  int base = 1;
+  int temp =n;
+    while (temp) {
+        int last_digit = temp % 10;
+        temp = temp / 10;
+
+        dec_value += last_digit * base;
+
+        base = base * 2;
+    }
+    cout<<dec_value;
+    return 0;
+}

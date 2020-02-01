@@ -1,0 +1,58 @@
+Given a String s, check it its palindrome. Return true if string is palindrome, else return false.
+Palindrome strings are those, where string s and its reverse is exactly same.
+Input Format :
+ String S
+Output Format :
+"true" if S is palindrome, else "false"
+Sample Input 1 :
+abcdcba
+Sample Output 1 :
+true
+
+
+
+#include<iostream>
+using namespace std;
+#include "Solution.h"
+
+int main(){
+
+  char str[10000];
+  cin.getline(str,10000);
+
+  if(checkPalindrome(str)){
+  	cout << "true" << endl;
+  }else{
+  cout << "false" << endl;
+  }
+}
+
+bool checkPalindrome(char str[]){
+
+
+  /* Don't write main().
+   *  Don't read input, it is passed as function argument.
+   *  Return output and don't print it.
+   *  Taking input and printing output is handled automatically.
+   */
+int begin, middle, end, length = 0;
+    while (str[length] != '\0')
+    length++;
+
+  end = length - 1;
+  middle = length/2;
+
+  for (begin = 0; begin < middle; begin++)
+  {
+    if (str[begin] != str[end])
+    {
+      return false;
+      break;
+    }
+    end--;
+  }
+  if (begin == middle)
+    return true;
+
+  return 0;
+}

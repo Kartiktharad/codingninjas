@@ -1,0 +1,52 @@
+Given a number N, figure out if it is a member of fibonacci series or not. Return true if the number is member of fibonacci series else false.
+Fibonacci Series is defined by the recurrence
+    F(n) = F(n-1) + F(n-2)
+Input Format :
+Integer N
+Output Format :
+true or false
+Sample Input 1 :
+5
+Sample Output 1 :
+true
+Sample Input 2 :
+14
+Sample Output 2 :
+false
+
+#include<iostream>
+using namespace std;
+#include "Solution.h"
+
+int main(){
+
+  int n;
+  cin >> n ;
+  if(checkMember(n)){
+    cout << "true" << endl;
+  }else{
+    cout << "false" << endl;
+  }
+
+}
+
+
+bool checkMember(int n){
+
+  /* Don't write main().
+   * Don't read input, it is passed as function argument.
+   * Return output and don't print it.
+   * Taking input and printing output is handled automatically.
+  */
+ int f[n+2];
+    f[0]=0;
+    f[1]=1;
+    for(int i=2;i<n;i++)
+    {
+        f[i]=f[i-1]+f[i-2];
+        if(f[i]==n)
+        {return true;
+         break;}
+    }
+return false;
+}

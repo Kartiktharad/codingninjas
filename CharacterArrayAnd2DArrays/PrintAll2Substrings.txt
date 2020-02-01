@@ -1,0 +1,62 @@
+Given a String S of length n, print all its substrings.
+Substring of a String S is a part of S (of any length from 1 to n), which contains all consecutive characters from S.
+Input Format :
+String S
+Output Format :
+ All Substrings of S, one in each line.
+Note : The order in which you print substrings doesn't matter.
+Sample Input 1 :
+xyz
+Sample Output 1 :
+x
+xy
+xyz
+y
+yz
+z
+
+#include<iostream>
+using namespace std;
+#include "Solution.h"
+
+int main(){
+
+  char str[10000];
+  cin.getline(str,10000);
+
+  printSubstrings(str);
+}
+
+
+// input - given string
+// You need to update in the given string itself. No need to print or return anything
+
+void reverseStringWordWise(char input[]) {
+    // Write your code here
+int len=0,i=0;
+    while(input[len]!='\0')
+        len++;
+    int j=len-1;
+    while(i<j)
+    {
+        char temp=input[i];
+        input[i]=input[j];
+        input[j]=temp;
+        i++;
+        j--;
+    }
+int s=0,e=0;//s is start of word and e is end of word
+    for(int e=0;e<=len;e++)
+    {
+        if(input[e]==' '||input[e]=='\0')
+        {
+            for(int j=s,k=e-1; j<=k; j++,k--)
+                   {   int temp=input[j];
+                       input[j]=input[k];
+                         input[k]=temp;
+                     }
+                   s=e+1;
+        }
+
+    }
+}

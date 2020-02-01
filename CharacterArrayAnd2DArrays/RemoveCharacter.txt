@@ -1,0 +1,46 @@
+Given a string and a character x. Write a function to remove all occurrences of x character from the given string.
+Leave the string as it is, if the given character is not present in the string.
+Input format :
+
+Line 1 : Input string
+
+Line 2 : Character x
+
+Sample Input :
+welcome to coding ninjas
+o
+Sample Output :
+welcme t cding ninjas
+
+
+
+#include <iostream>
+#include "solution.h"
+using namespace std;
+
+int main() {
+    char input[1000];
+    cin.getline(input, 1000);
+    char c;
+    cin >> c;
+    removeAllOccurrencesOfChar(input, c);
+    cout << input << endl;
+}
+
+// input - given string
+// You need to remove all occurrences of character c that are present in string input.
+// Change in the input itself. So no need to return or print anything.
+
+void removeAllOccurrencesOfChar(char input[], char c) {
+    // Write your code here
+int len=0;
+    while(input[len]!=0)
+        len++;
+     int j=0;
+    for (int i=0; i<len; i++)
+       if (input[i] != c)
+          input[j++] = input[i];
+
+    input[j] = '\0';
+
+}

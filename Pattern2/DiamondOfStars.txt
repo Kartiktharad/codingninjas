@@ -1,0 +1,62 @@
+Print the following pattern for the given number of rows.
+Assume, N is always odd.
+Pattern for N = 7
+   *
+  ***
+ *****
+*******
+ *****
+  ***
+   *
+Input format :
+N (Total no. of rows and can only be odd)
+Output format :
+Pattern in N lines
+Sample Input :
+5
+Sample Output :
+  *
+ ***
+*****
+ ***
+  *
+
+
+  #include<iostream>
+using namespace std;
+#include "solution.h"
+
+int main()
+{
+	int n;
+	cin>>n;
+
+	printPatt(n);
+	return 0;
+}
+
+
+  void printPatt(int n)
+  {
+      //write your code here
+   int i,j,k;
+      cin>>n;
+      for (i=1;i<=(n/2+1);i++) {
+  		for (j=i;j<(n/2+1);j++) {
+  			cout<<" ";
+  		}
+  		for (k=1;k<(i*2);k++) {
+  			cout<<"*";
+  		}
+  		cout<<endl;
+  	}
+  	for (i=(n/2);i>=1;i--) {
+  		for (j=(n/2+1);j>i;j--) {
+  			cout<<" ";
+  		}
+  		for (k=1;k<(i*2);k++) {
+  			cout<<"*";
+  		}
+  		cout<<endl;
+  	}
+  }

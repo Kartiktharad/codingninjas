@@ -1,0 +1,38 @@
+Print the following pattern for the given N number of rows.
+Pattern for N = 4
+4444
+333
+22
+1
+Input format :
+Integer N (Total no. of rows)
+Output format :
+Pattern in N lines
+Sample Input :
+5
+Sample Output :
+55555
+4444
+333
+22
+1
+
+#include<iostream>
+using namespace std;
+
+
+int main(){
+
+       /*  Read input as specified in the question.
+	* Print output as specified in the question.
+	*/
+  int n;
+    cin>>n;
+    for(int r=n;r>=1;r--)
+    {
+        for(int c=1;c<=r;c++)
+            cout<<r;
+   cout<<endl;
+    }
+    return 0;
+}

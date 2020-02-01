@@ -1,0 +1,38 @@
+Print the following pattern for the given N number of rows.
+Pattern for N = 4
+*
+**
+***
+****
+Input format :
+Integer N (Total no. of rows)
+Output format :
+Pattern in N lines
+Sample Input :
+5
+Sample Output :
+*
+**
+***
+****
+*****
+
+#include<iostream>
+using namespace std;
+
+
+int main(){
+
+       /*  Read input as specified in the question.
+	* Print output as specified in the question.
+	*/
+  int n;
+    cin>>n;
+    for(int r=1;r<=n;r++)
+    {
+        for(int c=1;c<=r;c++)
+            cout<<"*";
+        cout<<endl;
+    }
+return 0;
+}

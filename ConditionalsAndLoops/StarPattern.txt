@@ -1,0 +1,30 @@
+Print the following pattern
+Pattern for N = 4
+    *
+   ***
+  *****
+ *******
+
+ #include<iostream>
+using namespace std;
+
+
+int main(){
+
+       /*  Read input as specified in the question.
+	* Print output as specified in the question.
+	*/
+  int r;
+    cin>>r;
+    for(int a=0;a<r;a++)
+    {
+        for(int space=r-a-2;space>=0;space--)
+            cout<<" ";
+        for(int j=0;j<=a;j++)
+            cout<<"*";
+        for(int temp=1;temp<=a;temp++)
+            cout<<"*";
+            cout<<endl;
+    }
+    return 0;
+}
