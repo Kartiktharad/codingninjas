@@ -1,0 +1,75 @@
+Assume that the value of a = 1, b = 2, c = 3, ... , z = 26. You are given a numeric string S. Write a program to return the list of all possible codes that can be generated from the given string.
+Note : The order of codes are not important. And input string does not contain 0s.
+Input format :
+A numeric string
+Constraints :
+1 <= Length of String S <= 10
+Sample Input:
+1123
+Sample Output:
+aabc
+kbc
+alc
+aaw
+kw
+
+
+#include <iostream>
+#include "solution.h"
+using namespace std;
+
+int main(){
+    string input;
+    cin >> input;
+
+    string output[10000];
+    int count = getCodes(input, output);
+    for(int i = 0; i < count && i < 10000; i++)
+        cout << output[i] << endl;
+    return 0;
+}
+#include <string.h>
+using namespace std;
+
+int helper(string input,string smalloutput,string duplicate[],string output[],int count)
+{
+  static int i=0;
+  if(input.empty())
+  {
+    output[i++]=smalloutput;
+    return 0;
+
+  }
+  else
+  {
+    string tempoutput = smalloutput ;
+    int temp1=int(input[0])-48;
+
+      smalloutput=smalloutput+duplicate[temp1];
+      int count2= 1+ helper(input.substr(1),smalloutput,duplicate,output,count);
+
+    if(input.length()>=2)
+    {
+       int temp2= (input[0]-'0')*10 + (input[1]-'0')  ;
+      if(temp2<=26)
+      {
+
+      tempoutput+=duplicate[temp2];
+       helper(input.substr(2),tempoutput,duplicate,output,count);
+      }
+    }
+
+    return count2;
+}
+}
+
+
+
+int getCodes(string input, string output[10000]) {
+int count=0;
+   string smalloutput="";
+  string duplicate[]={"","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+  return helper(input,smalloutput,duplicate,output,count);
+
+
+}

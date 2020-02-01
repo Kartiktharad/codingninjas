@@ -1,0 +1,40 @@
+Write a recursive function to convert a given string into the number it represents. That is input will be a numeric string that contains only numbers, you need to convert the string into corresponding integer and return the answer.
+Input format :
+Numeric string (string, Eg. "1234")
+Output format :
+Corresponding integer (int, Eg. 1234)
+Sample Input 1 :
+1231
+Sample Output 1:
+1231
+Sample Input 2 :
+12567
+Sample Output 2 :
+12567
+
+
+#include <iostream>
+#include "solution.h"
+using namespace std;
+
+int main() {
+    char input[50];
+    cin >> input;
+    cout << stringToNumber(input) << endl;
+}
+
+#include<cstring>
+int stringToNumber(char input[], int last){
+	//Base Case
+	if(last == 0){
+		return input[last]-'0';
+	}
+	//Recursive Call
+	int smallAns = stringToNumber(input,last-1);
+	int a = input[last]-'0' ;
+	return smallAns * 10 + a;
+}
+int stringToNumber(char input[]) {
+    int len = strlen(input);
+	return stringToNumber(input,len-1);
+}

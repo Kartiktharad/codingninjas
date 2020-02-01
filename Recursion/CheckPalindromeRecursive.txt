@@ -1,0 +1,62 @@
+Check if a given String S is palindrome or not (using recursion). Return true or false.
+Input Format :
+String S
+Output Format :
+true or false
+Sample Input 1 :
+racecar
+Sample Output 1:
+true
+Sample Input 2 :
+ninja
+Sample Output 2:
+false
+
+
+#include <iostream>
+#include "solution.h"
+using namespace std;
+
+int main() {
+    char input[50];
+    cin >> input;
+
+    if(checkPalindrome(input)) {
+        cout << "true" << endl;
+    }
+    else {
+        cout << "false" << endl;
+    }
+}
+
+#include<cstring>
+bool isPalRec(char str[],
+              int s, int e)
+{
+    // If there is only one character
+    if (s == e)
+    return true;
+
+    // If first and last
+    // characters do not match
+    if (str[s] != str[e])
+    return false;
+
+    // If there are more than
+    // two characters, check if
+    // middle substring is also
+    // palindrome or not.
+    if (s < e + 1)
+    return isPalRec(str, s + 1, e - 1);
+
+    return true;
+}
+bool checkPalindrome(char input[]) {
+    // Write your code here
+int n = strlen(input);
+
+// An empty string is
+// considered as palindrome
+return isPalRec(input, 0, n - 1);
+
+}

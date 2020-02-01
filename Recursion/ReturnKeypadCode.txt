@@ -1,0 +1,143 @@
+Given an integer n, using phone keypad find out all the possible strings that can be made using digits of input n.
+Return empty string for numbers 0 and 1.
+Note : The order of strings are not important.
+Input Format :
+Integer n
+Output Format :
+All possible strings in different lines
+Constraints :
+1 <= n <= 10^6
+Sample Input:
+23
+Sample Output:
+ad
+ae
+af
+bd
+be
+bf
+cd
+ce
+cf
+
+
+
+#include <string>
+#include "solution.h"
+using namespace std;
+
+int main(){
+    int num;
+    cin >> num;
+
+    string output[10000];
+    int count = keypad(num, output);
+    for(int i = 0; i < count && i < 10000; i++){
+        cout << output[i] << endl;
+    }
+    return 0;
+}
+#include <string>
+using namespace std;
+
+Method 1
+/*
+int keypad(int num, string output[]){
+
+    string input;
+    int size;
+    if(num==0)
+    {
+        output[0]="";
+        return 1;
+    }
+    if(num==1)
+    {
+        return 0;
+    }
+    int k=num%10;
+    int p=keypad(num/10,output);
+    if(k==2){
+        input="abc";
+        size=3;
+    }
+    if(k==3){
+        input="def";
+        size=3;
+    }
+    if(k==4){
+        input="ghi";
+        size=3;
+    }
+    if(k==5){
+        input="jkl";
+        size=3;
+    }
+    if(k==6){
+        input="mno";
+        size=3;
+    }
+    if(k==7){
+        input="pqrs";
+        size=4;
+    }
+    if(k==8){
+        input="tuv";
+        size=3;
+    }
+    if(k==9){
+        input="wxyz";
+        size=4;
+    }
+
+    for(int i=1;i<size;i++)
+    {
+        for(int j=0;j<p;j++)
+        {
+            output[j+(p*i)]=output[j]+input[i];
+        }
+    }
+
+    for(int j=0;j<p;j++)
+    {
+        output[j]=output[j]+input[0];
+    }
+
+
+    return (p*size);
+
+}
+*/
+
+Method 2
+int keypad(int num,string output[],string options[])
+{
+if(num==0)
+{output[0]="";
+return 1;
+}
+
+int lastDigit=num%10;
+int smallNumber=num/10;
+string smallOutput[500];
+
+int smallCount=keypad(smallNumber,smallOutput,options);
+string op=options[lastDigit];
+
+int k=0;
+for(int i=0;i<op.length();i++)
+{
+for(int j=0;j<smallCount;j++)
+{
+output[k]=smallOutput[j]+op[i];
+k++;
+}
+}
+return k;
+}
+
+int keypad(int num,string output[])
+{
+string options[]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+return keypad(num,output,options);
+}

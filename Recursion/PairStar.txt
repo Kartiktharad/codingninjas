@@ -1,0 +1,41 @@
+Given a string, compute recursively a new string where identical chars that are adjacent in the original string are separated from each other by a "*".
+Sample Input 1 :
+hello
+Sample Output 1:
+hel*lo
+Sample Input 2 :
+xxyy
+Sample Output 2:
+x*xy*y
+Sample Input 3 :
+aaaa
+Sample Output 3:
+a*a*a*a
+
+
+#include <iostream>
+#include "solution.h"
+using namespace std;
+
+int main() {
+   char input[100];
+   cin.getline(input, 100);
+   pairStar(input);
+   cout << input << endl;
+}
+
+#include<cstring>
+int stringToNumber(char input[], int last){
+	//Base Case
+	if(last == 0){
+		return input[last]-'0';
+	}
+	//Recursive Call
+	int smallAns = stringToNumber(input,last-1);
+	int a = input[last]-'0' ;
+	return smallAns * 10 + a;
+}
+int stringToNumber(char input[]) {
+    int len = strlen(input);
+	return stringToNumber(input,len-1);
+}

@@ -1,0 +1,29 @@
+Given k, find the geometric sum i.e.
+1 + 1/2 + 1/4 + 1/8 + ... + 1/(2^k)
+using recursion. Return the answer.
+Sample Input :
+3
+Sample Output :
+1.875
+
+
+#include <iostream>
+#include <math.h>
+#include <iomanip>
+#include "solution.h"
+using namespace std;
+
+int main() {
+    int k;
+    cin >> k;
+    cout << fixed << setprecision(5);
+    cout << geometricSum(k) << endl;
+}
+double geometricSum(int k) {
+    // Write your code here
+if(k==0)
+    return 1;
+    int a=pow(2,k);
+        return (double)1/a + geometricSum(k-1);
+
+}
