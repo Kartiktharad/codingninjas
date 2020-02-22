@@ -1,0 +1,186 @@
+You are given with an array of integers that contain numbers in random order. Write a program to find the longest possible sequence of consecutive numbers using the numbers from given array.
+You need to return the output array which contains consecutive elements. Order of elements in the output is not important.
+Best solution takes O(n) time.
+If two sequences are of equal length then return the sequence starting with the number whose occurrence is earlier in the array.
+Input Format :
+Line 1 : Integer n, Size of array
+Line 2 : Array elements (separated by space)
+Constraints :
+1 <= n <= 50000
+Sample Input 1 :
+13
+2 12 9 16 10 5 3 20 25 11 1 8 6
+Sample Output 1 :
+8
+9
+10
+11
+12
+Sample Input 2 :
+7
+3 7 2 1 9 8 1
+Sample Output 2 :
+7
+8
+9
+Explanation: Sequence should be of consecutive numbers. Here we have 2 sequences with same length i.e. [1, 2, 3] and [7, 8, 9], but output should be [7, 8, 9] because the starting point of [7, 8, 9] comes first in input array.
+Sample Input 3 :
+7
+15 24 23 12 19 11 16
+Sample Output 3 :
+15
+16
+
+
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+int minimum(int *input, int n,int value1, int value2)
+{
+	int index1,index2;
+
+	for(int i=0;i<n;i++)
+	{
+		if(input[i] == value1)
+		{
+			index1 = i;
+			break;
+		}
+
+	}
+
+	for(int i=0;i<n;i++)
+	{
+		if(input[i] == value2)
+		{
+			index2 = i;
+			break;
+		}
+
+	}
+
+
+	if(index1 > index2)
+		return value2;
+	else
+		return value1;
+
+}
+
+vector<int> longestConsecutiveIncreasingSequence(int *input, int n){
+	//Your Code goes here
+
+	unordered_map<int, bool> ourmap;
+	unordered_map<int, bool> temp;
+
+	int max = 0;
+	int mid = 0;
+	int no_left = 0;
+	int no_right = 0;
+
+	for(int i=0;i<n;i++)
+		ourmap[ input[i] ] = true;
+
+	for(int i=0;i<n;i++)
+		temp[ input[i] ] = false;
+
+
+
+	for(int i=0;i<n;i++)
+	{
+
+		if(temp[ input[i] ] == true) //means that input[i] has been already visited
+			continue;
+
+
+		temp[ input[i] ] = true;
+
+		int front = 0;
+		while(1)
+		{
+			if( ourmap[ input[i]+front+1 ] ==  true   )
+			{
+				temp[ input[i]+front+1 ] =  true;
+				front++;
+			}
+
+			else
+				break;
+		}
+
+
+		int back = 0;
+		while(1)
+		{
+			if( ourmap[ input[i] + back - 1 ] ==  true   )
+			{
+				temp[ input[i] + back-1 ] =  true;
+				back--;
+			}
+
+			else
+				break;
+		}
+
+
+
+		if(max < front-back+1)
+		{
+
+			max = front-back+1;
+			mid = input[i];
+			no_left = -1*back;
+			no_right = front;
+		}
+
+		if(max == front-back+1)
+		{
+			int value1 = mid-no_left;
+			int value2 = input[i] + back;
+
+			int min = minimum(input,n,value1,value2);
+
+			if(min == value2)
+			{
+				max = front-back+1;
+				mid = input[i];
+				no_left = -1*back;
+				no_right = front;
+			}
+
+		}
+
+	}
+
+	vector<int> output;
+
+	for(int i=0;i<max;i++)
+		output.push_back( mid - no_left + i );
+
+	return output;
+}
+
+
+
+#include "Solution.h"
+#include<iostream>
+using namespace std;
+
+int main(){
+  int size;
+
+  cin >> size;
+  int* arr = new int[size];
+  for(int i = 0; i < size; i++){
+    cin >> arr[i];
+  }
+  vector<int> ans = longestConsecutiveIncreasingSequence(arr,size);
+
+  for (auto it = ans.cbegin(); it != ans.cend(); it++) {
+	cout << *it <<endl;
+  }
+
+  delete arr;
+}

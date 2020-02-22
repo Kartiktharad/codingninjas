@@ -1,0 +1,71 @@
+You are given with an array of integers that contain numbers in random order. Write a program to find and return the number which occurs maximum times in the given input.
+If more than one element occurs same number of times in the input, return the element which is present in the input first.
+Input Format :
+Line 1 : An Integer N i.e. size of array
+Line 2 : N integers which are elements of the array, separated by spaces
+Output Format :
+Most frequent element
+Constraints :
+1 <= N <= 10^5
+Sample Input 1 :
+13
+2 12 2 11 12 2 1 2 2 11 12 2 6
+Sample Output 1 :
+2
+Sample Input 2 :
+3
+1 4 5
+Sample Output 2 :
+1
+
+
+#include<vector>
+#include<unordered_map>
+#include<cmath>
+	int highestFrequency(int *a, int n){
+		unordered_map<int,int> seen;
+        while(n>=1 && n<=pow(10,5)){
+            for(int i=0;i<n;i++){
+                if(seen.count(a[i])>0){
+                    seen[a[i]]++;
+                }
+                else{
+                    seen[a[i]] = 1;
+                }
+            }
+
+            int s=seen.size();
+            int max=seen[a[0]];
+            for(int i=1;i<n;i++){
+                if(seen[a[i]]>max){
+                    max=seen[a[i]];
+                }
+            }
+
+            for(int i=0;i<n;i++){
+                if(seen[a[i]]==max){
+                    return a[i];
+                }
+            }
+        }
+    }
+
+
+
+    #include<iostream>
+    using namespace std;
+    #include "solution.h"
+
+    int main()
+    {
+        int n;
+        int input[100000];
+        cin>>n;
+        for(int i=0; i<n; i++)
+        {
+            cin>>input[i];
+        }
+        int maxKey= highestFrequency(input, n);
+        cout<<maxKey;
+        return 0;
+    }
