@@ -1,0 +1,74 @@
+A thief robbing a store and can carry a maximal weight of W into his knapsack. There are N items and ith item weigh wi and is of value vi. What is the maximum value V, that thief can take ?
+Space complexity should be O(n).
+Input Format :
+Line 1 : N i.e. number of items
+Line 2 : N Integers i.e. weights of items separated by space
+Line 3 : N Integers i.e. values of items separated by space
+Line 4 : Integer W i.e. maximum weight thief can carry
+Output Format :
+Line 1 : Maximum value V
+Constraints
+1 <= N <= 10^4
+1<= wi <= 100
+1 <= vi <= 100
+Sample Input 1 :
+4
+1 2 4 5
+5 4 8 6
+5
+Sample Output :
+13
+
+
+int knapsack(int* weights, int* values, int n, int maxWeights){
+
+  /* Don't write main().
+   *  Don't read input, it is passed as function argument.
+   *  Return output and don't print it.
+   *  Taking input and printing output is handled automatically.
+  */
+  int dp[maxWeights + 1];                //using 1D array
+    for (int i=0; i <= maxWeights; i++)
+        dp[i] = 0;
+
+    for(int i=0; i < n; i++)
+    {
+        //traverse dp array from right to left
+        for(int j = maxWeights; j>=weights[i]; j--)
+            dp[j] = max(dp[j] , values[i] + dp[j-weights[i]]);
+    }
+    /*above line finds out maximum of  dp[j](excluding ith element value)
+      and val[i] + dp[j-wt[i]] (including ith element value and the
+      profit with "KnapSack capacity - ith element weight") */
+
+    return dp[maxWeights];
+
+}
+
+
+
+#include<iostream>
+using namespace std;
+#include "Solution.h"
+
+int main(){
+
+  int n;
+  cin >> n;
+  int* weights = new int[n];
+  int* values = new int[n];
+
+  for(int i = 0; i < n; i++){
+    cin >> weights[i];
+  }
+
+  for(int i = 0; i < n; i++){
+    cin >> values[i];
+  }
+
+  int maxWeight;
+  cin >> maxWeight;
+
+  cout << knapsack(weights, values, n, maxWeight);
+
+}
